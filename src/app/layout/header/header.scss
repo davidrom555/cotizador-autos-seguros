@@ -1,0 +1,517 @@
+header {
+  background: linear-gradient(135deg, #343a40 0%, #495057 100%);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  
+  @media (max-width: 576px) {
+    padding: 0.75rem 0.5rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 500;
+    
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+    
+    @media (max-width: 576px) {
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+  }
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 2rem;
+  
+  @media (max-width: 1200px) {
+    max-width: 1200px;
+    padding: 0.75rem 1.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 0.75rem 1rem;
+  }
+  
+  @media (max-width: 576px) {
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+// Logo y marca
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: white;
+  
+  @media (max-width: 576px) {
+    gap: 0.5rem;
+  }
+  
+  .brand-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    border-radius: 12px;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    
+    @media (max-width: 576px) {
+      width: 40px;
+      height: 40px;
+      font-size: 1.25rem;
+      border-radius: 8px;
+    }
+    
+    i {
+      color: white;
+    }
+  }
+  
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      
+      @media (max-width: 768px) {
+        font-size: 1.25rem;
+      }
+      
+      @media (max-width: 576px) {
+        font-size: 1.1rem;
+      }
+    }
+    
+    .brand-subtitle {
+      font-size: 0.75rem;
+      opacity: 0.8;
+      font-weight: 400;
+      line-height: 1;
+      
+      @media (max-width: 576px) {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+// Navegación desktop
+.desktop-nav {
+  display: flex;
+  
+  @media (max-width: 1024px) {
+    display: none;
+  }
+  
+  .nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.5rem;
+  }
+  
+  .nav-item {
+    position: relative;
+  }
+  
+  .nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.75rem 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+    font-weight: 500;
+    min-width: 80px;
+    
+    &:hover {
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    &.active {
+      color: white;
+      background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    }
+    
+    i {
+      font-size: 1.1rem;
+    }
+    
+    span {
+      line-height: 1.2;
+      text-align: center;
+    }
+  }
+}
+
+// Botón hamburguesa
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  
+  @media (max-width: 1024px) {
+    display: flex;
+  }
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  &.active {
+    background: rgba(255, 255, 255, 0.2);
+    
+    .hamburger-line:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+    
+    .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .hamburger-line:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+  }
+  
+  .hamburger-line {
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    margin: 2px 0;
+  }
+}
+
+// Navegación móvil
+.mobile-nav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #343a40 0%, #495057 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  
+  @media (max-width: 1024px) {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    
+    &.open {
+      max-height: 400px;
+    }
+  }
+  
+  .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 1rem 0;
+  }
+  
+  .nav-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+    
+    @media (max-width: 768px) {
+      padding: 1rem 1rem;
+    }
+    
+    @media (max-width: 576px) {
+      padding: 0.875rem 0.75rem;
+      font-size: 0.9rem;
+    }
+    
+    &:hover {
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+      padding-left: 2.5rem;
+      
+      @media (max-width: 768px) {
+        padding-left: 1.5rem;
+      }
+      
+      @media (max-width: 576px) {
+        padding-left: 1.25rem;
+      }
+    }
+    
+    &.active {
+      color: white;
+      background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+      
+      &:hover {
+        padding-left: 2rem;
+        
+        @media (max-width: 768px) {
+          padding-left: 1rem;
+        }
+        
+        @media (max-width: 576px) {
+          padding-left: 0.75rem;
+        }
+      }
+    }
+    
+    i {
+      font-size: 1.1rem;
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    
+    span {
+      flex: 1;
+    }
+  }
+}
+
+// Overlay para cerrar menú móvil
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  
+  @media (max-width: 1024px) {
+    &.active {
+      display: block;
+      opacity: 1;
+    }
+  }
+}
+
+// Animaciones de entrada
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-nav.open {
+  animation: fadeInDown 0.3s ease;
+}
+
+// Estados de navegación
+.nav-link {
+  position: relative;
+  overflow: hidden;
+  
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    
+    &:hover {
+      transform: none;
+      background: none;
+    }
+    
+    &::before {
+      display: none;
+    }
+  }
+  
+  .step-indicator {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    
+    &.completed {
+      background: #28a745;
+      border-color: #28a745;
+      color: white;
+      animation: checkmark 0.5s ease;
+    }
+    
+    &.available {
+      background: rgba(0, 123, 255, 0.2);
+      border-color: rgba(0, 123, 255, 0.5);
+      color: white;
+    }
+    
+    i {
+      font-size: 0.6rem;
+    }
+    
+    .step-number {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: white;
+    }
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  &:hover::before {
+    left: 100%;
+  }
+}
+
+// Estilos específicos para navegación móvil
+.mobile-nav {
+  .nav-link {
+    .step-indicator {
+      position: static;
+      margin-left: auto;
+      width: 20px;
+      height: 20px;
+      font-size: 0.8rem;
+      
+      &.completed {
+        background: #28a745;
+        border-color: #28a745;
+        color: white;
+      }
+      
+      &.available {
+        background: rgba(0, 123, 255, 0.3);
+        border-color: rgba(0, 123, 255, 0.6);
+        color: white;
+      }
+      
+      i {
+        font-size: 0.7rem;
+      }
+      
+      .step-number {
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: white;
+      }
+    }
+    
+    &.disabled {
+      opacity: 0.6;
+      
+      .step-indicator {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+// Animaciones para cambios de estado
+@keyframes checkmark {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// Estados de hover mejorados para indicadores completados
+.step-indicator.completed {
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+  
+  &:hover {
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+    transform: scale(1.1);
+  }
+}
+
+// Estados para indicadores disponibles
+.step-indicator.available {
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+  
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    transform: scale(1.05);
+  }
+}

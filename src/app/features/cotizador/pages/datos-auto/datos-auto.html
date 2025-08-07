@@ -1,0 +1,252 @@
+<div class="main-content form-container">
+  <div class="container">
+    <!-- MODAL DE ERROR DE RED -->
+    <app-network-error-modal
+      [show]="networkErrorModal()"
+      [message]="networkErrorMessage()"
+      (closed)="networkErrorModal.set(false)"
+    ></app-network-error-modal>
+
+    <div class="form-header">
+      <div class="car-icon">
+        <i class="fas fa-car"></i>
+      </div>
+      <h2>Información del Vehículo</h2>
+      <p class="subtitle">Ingresá los datos principales de tu auto para personalizar tu seguro</p>
+    </div>
+
+    <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
+      <div class="form-content">
+        <div class="form-section">
+          <div class="form-fields-grid">
+            <div class="custom-field">
+              <label class="field-label">
+                <i class="fas fa-industry"></i>
+                Marca <span class="required">*</span>
+              </label>
+              <div class="input-container">
+                <input 
+                  type="text" 
+                  formControlName="brand" 
+                  [matAutocomplete]="autoBrand"
+                  placeholder="Ingrese marca del vehículo"
+                  autocomplete="off"
+                  spellcheck="false"
+                  class="custom-input"
+                  [disabled]="loadingMarcas()">
+                <mat-autocomplete #autoBrand="matAutocomplete" [displayWith]="displayBrandFn">
+                  @if (loadingMarcas()) {
+                    <mat-option class="loading-option" disabled>
+                      <span class="buscando-container"><span class="spinner"></span><span class="buscando-text">Buscando marcas...</span></span>
+                    </mat-option>
+                  }
+                  @for (marca of filteredMarcas(); track marca.id) {
+                    <mat-option [value]="marca">
+                      {{ marca.nombre }}
+                    </mat-option>
+                  }
+                  @if (!loadingMarcas() && filteredMarcas().length === 0) {
+                    <mat-option disabled>
+                      <span class="error-busqueda"><i class="fas fa-exclamation-circle"></i> No se encontró la marca.</span>
+                    </mat-option>
+                  }
+                </mat-autocomplete>
+              </div>
+              <div class="error-message">
+                @if (carForm.get('brand')?.touched) {
+                  @if (carForm.get('brand')?.hasError('required')) {
+                    <span><i class="fas fa-exclamation-triangle error-icon"></i> Marca es requerida.</span>
+                  }
+                  @if (carForm.get('brand')?.hasError('invalidSelection')) {
+                    <span><i class="fas fa-exclamation-triangle error-icon"></i> Debe seleccionar una marca de la lista.</span>
+                  }
+                }
+              </div>
+            </div>
+
+            <!-- Modelo -->
+            <div class="custom-field">
+              <label class="field-label">
+                <i class="fas fa-car-side"></i>
+                Modelo <span class="required">*</span>
+              </label>
+              <div class="input-container">
+                <input 
+                  type="text" 
+                  formControlName="model" 
+                  [matAutocomplete]="autoModel" 
+                  [disabled]="!carForm.get('brand')?.value || loadingModelos()"
+                  placeholder="Ingrese modelo del vehículo"
+                  autocomplete="off"
+                  spellcheck="false"
+                  class="custom-input"
+                  maxlength="40">
+                
+                <mat-autocomplete #autoModel="matAutocomplete" [displayWith]="displayModelFn">
+                  @if (loadingModelos()) {
+                    <mat-option class="loading-option" disabled>
+                      <span class="buscando-container"><span class="spinner"></span><span class="buscando-text">Buscando modelos...</span></span>
+                    </mat-option>
+                  }
+                  @for (modelo of filteredModelos(); track modelo.id) {
+                    <mat-option [value]="modelo">
+                      {{ modelo.nombre }}
+                    </mat-option>
+                  }
+                  @if (!loadingModelos() && !carForm.get('brand')?.value) {
+                    <mat-option disabled>
+                      Seleccione una marca primero
+                    </mat-option>
+                  }
+                  @if (!loadingModelos() && carForm.get('brand')?.value && filteredModelos().length === 0) {
+                    <mat-option disabled>
+                      <span class="error-busqueda"><i class="fas fa-exclamation-circle"></i> No se encontró el modelo.</span>
+                    </mat-option>
+                  }
+                </mat-autocomplete>
+              </div>
+              <div class="error-message">
+                @if (carForm.get('model')?.touched) {
+                  @if (carForm.get('model')?.hasError('required')) {
+                    <span><i class="fas fa-exclamation-triangle error-icon"></i> Modelo es requerido.</span>
+                  }
+                  @if (carForm.get('model')?.hasError('invalidSelection')) {
+                    <span><i class="fas fa-exclamation-triangle error-icon"></i> Debe seleccionar un modelo de la lista.</span>
+                  }
+                }
+              </div>
+            </div>
+
+            <!-- Año del auto -->
+            <div class="custom-field select-field">
+              <label class="field-label">
+                <i class="fas fa-calendar-alt"></i>
+                Año del auto <span class="required">*</span>
+              </label>
+              <div class="custom-select">
+                <select formControlName="year" required>
+                  <option value="" disabled selected>Selecciona el año</option>
+                  @for (year of years; track year) {
+                    <option [value]="year">{{ year }}</option>
+                  }
+                </select>
+              </div>
+              <div class="error-message">
+                @if (carForm.get('year')?.invalid && carForm.get('year')?.touched) {
+                  <span>
+                    <i class="fas fa-exclamation-triangle error-icon"></i> Año es requerido.
+                  </span>
+                }
+              </div>
+            </div>
+
+            <div class="custom-field">
+              <label class="field-label">
+                <i class="fas fa-cogs"></i>
+                Versión <span class="required">*</span>
+              </label>
+              <div class="input-container">
+                <input 
+                  type="text" 
+                  formControlName="version" 
+                  [matAutocomplete]="autoVersion" 
+                  [disabled]="!carForm.get('model')?.value || loadingVersiones()"
+                  placeholder="Ingrese versión del vehículo"
+                  autocomplete="off"
+                  spellcheck="false"
+                  class="custom-input"
+                  maxlength="40">
+                
+                <mat-autocomplete #autoVersion="matAutocomplete" [displayWith]="displayVersionFn">
+                  @if (loadingVersiones()) {
+                    <mat-option class="loading-option" disabled>
+                      <mat-spinner diameter="20"></mat-spinner>
+                      <span style="margin-left: 10px;">Cargando versiones...</span>
+                    </mat-option>
+                  }
+                  @for (version of filteredVersiones(); track version.id) {
+                    <mat-option [value]="version">
+                      <div class="version-option">
+                        <div class="version-name">{{ version.nombre }}</div>
+                        @if (version.cilindrada || version.combustible) {
+                          <div class="version-details">
+                            <small>{{ version.cilindrada }} • {{ version.combustible }} • {{ version.transmision }}</small>
+                          </div>
+                        }
+                      </div>
+                    </mat-option>
+                  }
+                  @if (!loadingVersiones() && !carForm.get('model')?.value) {
+                    <mat-option disabled>
+                      Seleccione un modelo primero
+                    </mat-option>
+                  }
+                </mat-autocomplete>
+              </div>
+              <div class="error-message">
+                @if (carForm.get('version')?.invalid && carForm.get('version')?.touched) {
+                  <span>
+                    <i class="fas fa-exclamation-triangle error-icon"></i> Versión es requerida.
+                  </span>
+                }
+              </div>
+            </div>
+
+            <!-- GNC -->
+            <div class="custom-field">
+              <label class="field-label">
+                <i class="fas fa-gas-pump"></i>
+                GNC
+              </label>
+              <div class="input-container">
+                <label for="gnc" class="checkbox-container-inline" [class.checked]="carForm.get('gnc')?.value">
+                  <input type="checkbox" formControlName="gnc" id="gnc">
+                  <div class="checkmark">
+                    <i class="fas fa-check"></i>
+                  </div>
+                  <span class="checkbox-label-inline">
+                    ¿Tiene GNC?
+                  </span>
+                </label>
+              </div>
+              <div class="error-message">
+                
+              </div>
+            </div>
+
+            <!-- Uso del vehículo -->
+            <div class="custom-field select-field">
+              <label class="field-label">
+                <i class="fas fa-car-side"></i>
+                Uso del vehículo <span class="required">*</span>
+              </label>
+              <div class="custom-select">
+                <select formControlName="usage" required>
+                  <option value="" disabled selected>Selecciona el uso</option>
+                  <option value="particular">Particular</option>
+                  <option value="comercial">Comercial</option>
+                </select>
+              </div>
+              <div class="error-message">
+                @if (carForm.get('usage')?.invalid && carForm.get('usage')?.touched) {
+                  <span>
+                    <i class="fas fa-exclamation-triangle error-icon"></i> Uso es requerido.
+                  </span>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="form-options-section">
+        <div class="options-grid-simple" style="display: flex; justify-content: flex-end; align-items: center; margin-top: 2rem;"> 
+          <button type="submit" class="btn btn-primary btn-large" [disabled]="!carForm.valid" style="margin-right:0;">
+            Continuar <i class="fas fa-arrow-right icon"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

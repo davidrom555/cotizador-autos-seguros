@@ -1,0 +1,237 @@
+<ng-container *ngIf="car && plan && person">
+  <div class="container">
+    <div class="confirmation-header">
+      <div class="success-icon">✓</div>
+      <h2>¡Tu cotización está lista!</h2>
+      <p class="subtitle">
+        Revisá el resumen de tu seguro y elegí cómo continuar
+      </p>
+    </div>
+
+    <div class="quotation-card">
+      <div class="plan-highlight">
+        <div class="plan-info">
+          <h3>{{ plan.name }}</h3>
+          <p class="plan-description">{{ plan.description }}</p>
+        </div>
+        <div class="plan-price">
+          <span class="currency">$</span>
+          <span class="amount">{{ formatPrice(getDynamicPlanPrice()) }}</span>
+          <span class="period">/mes</span>
+        </div>
+      </div>
+
+      <div class="summary-grid">
+        <div class="summary-section">
+          <h4><i class="fas fa-car"></i> Tu Vehículo</h4>
+          <div class="info-list">
+            <div class="info-item">
+              <span class="label">Marca:</span>
+              <span class="value">{{ getDisplayValue(car.brand) }}</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Modelo:</span>
+              <span class="value">{{ getDisplayValue(car.model) }}</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Versión:</span>
+              <span class="value">{{ getDisplayValue(car.version) }}</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Año:</span>
+              <span class="value">{{ car.year }}</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Uso:</span>
+              <span class="value">
+                {{ car.usage === 'particular' ? 'Particular' : 'Comercial' }}
+              </span>
+            </div>
+            <div class="info-item" *ngIf="car.gnc">
+              <span class="label">GNC:</span>
+              <span class="value">Sí</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-section">
+          <h4><i class="fas fa-user"></i> Tus Datos</h4>
+          <div class="info-list">
+            <div class="info-item">
+              <span class="label">Nombre:</span>
+              <span class="value">
+                {{ person.firstName }} {{ person.lastName }}
+              </span>
+            </div>
+            <div class="info-item">
+              <span class="label">Email:</span>
+              <span class="value">{{ person.email }}</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Teléfono:</span>
+              <span class="value">{{ person.phone }}</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Localidad:</span>
+              <span class="value">
+                {{ person.locality }} ({{ person.postalCode }})
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="coverage-section">
+        <h4><i class="fas fa-shield-alt"></i> Tu Cobertura Incluye</h4>
+        <div class="features-grid">
+          <div class="feature-item" *ngFor="let feature of planFeatures()">
+            <i class="checkmark">✓</i>
+            <span>{{ feature }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-cards">
+      <div class="action-card primary">
+        <div class="card-content">
+          <h3>¡Contratá ahora!</h3>
+          <p>Aprovechá esta cotización y asegurá tu vehículo hoy mismo</p>
+          <button
+            type="button"
+            class="btn btn-primary btn-large"
+            [class.loading]="isSubmitting()"
+            [disabled]="isSubmitting()"
+            (click)="contractInsurance()"
+          >
+            <i class="fas fa-rocket" *ngIf="!isSubmitting()"></i>
+            {{ isSubmitting() ? 'Procesando...' : 'Contratar Seguro' }}
+          </button>
+        </div>
+      </div>
+
+      <div class="action-card secondary">
+        <div class="card-content">
+          <h3>Guardá tu cotización</h3>
+          <p>Descargá el PDF para revisar más tarde o comparar</p>
+          <button
+            type="button"
+            class="btn btn-outline"
+            (click)="downloadPDF()"
+          >
+            <i class="fas fa-file-pdf"></i>
+            Descargar PDF
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="additional-actions">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="goBack()"
+      >
+        <i class="fas fa-arrow-left"></i> Modificar datos
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="newQuotation()"
+      >
+        <i class="fas fa-redo"></i> Nueva cotización
+      </button>
+    </div>
+
+    <!-- MODAL DE CONFIRMACIÓN -->
+    <div
+      class="modal-overlay"
+      *ngIf="showConfirmationModal()"
+      (click)="closeModal()"
+    >
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <div class="success-animation">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h2>¡Solicitud Enviada!</h2>
+          <button class="modal-close" (click)="closeModal()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="confirmation-message">
+            <p class="main-message">
+              <strong>¡Excelente!</strong> Hemos recibido tu solicitud de contratación.
+            </p>
+
+            <div class="next-steps">
+              <h4><i class="fas fa-list-check"></i> Próximos pasos:</h4>
+              <ul>
+                <li>
+                  <i class="fas fa-envelope"></i>
+                  <span>
+                    Te enviamos un email de confirmación a
+                    <strong>{{ person.email }}</strong>
+                  </span>
+                </li>
+                <li>
+                  <i class="fas fa-phone"></i>
+                  <span>Nuestro equipo te contactará a la brevedad</span>
+                </li>
+                <li>
+                  <i class="fas fa-file-contract"></i>
+                  <span>
+                    Recibirás la póliza digital una vez completado el proceso
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="contact-info">
+              <div class="info-box">
+                <i class="fas fa-headset"></i>
+                <div>
+                  <strong>¿Tenés alguna consulta?</strong>
+                  <p>Llamanos al <strong>0800-123-000</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-primary btn-large" (click)="closeModal()">
+            <i class="fas fa-check"></i>
+            Entendido
+          </button>
+          <button
+            class="btn btn-secondary"
+            (click)="downloadPDF(); closeModal()"
+          >
+            <i class="fas fa-download"></i>
+            Descargar PDF
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE ERROR DE RED -->
+    <div
+      class="modal-overlay"
+      *ngIf="networkErrorModal()"
+    >
+      <div class="modal-network-error">
+        <div class="modal-icon">
+          <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h3 class="modal-title">Error de red</h3>
+        <p class="modal-message">{{ networkErrorMessage() }}</p>
+        <button class="modal-btn" (click)="closeNetworkErrorModal()">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

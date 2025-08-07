@@ -1,0 +1,14 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding: 10px;
+
+  @media (min-width: 768px) {
+    padding: 20px;
+  }
+}

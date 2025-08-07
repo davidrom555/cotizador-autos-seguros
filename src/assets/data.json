@@ -1,0 +1,26 @@
+
+{
+  "marcas": [
+    { "id": 1, "nombre": "Ford" },
+    { "id": 2, "nombre": "Chevrolet" },
+    { "id": 3, "nombre": "Toyota" },
+    { "id": 4, "nombre": "Volkswagen" }
+  ],
+  "modelos": [
+    { "id": 1, "marcaId": 1, "nombre": "Fiesta" },
+    { "id": 2, "marcaId": 1, "nombre": "Focus" },
+    { "id": 3, "marcaId": 1, "nombre": "Ka" },
+    { "id": 4, "marcaId": 2, "nombre": "Onix" },
+    { "id": 5, "marcaId": 2, "nombre": "Cruze" },
+    { "id": 6, "marcaId": 2, "nombre": "Tracker" },
+    { "id": 7, "marcaId": 3, "nombre": "Corolla" },
+    { "id": 8, "marcaId": 3, "nombre": "Etios" },
+    { "id": 9, "marcaId": 3, "nombre": "Hilux" },
+    { "id": 10, "marcaId": 4, "nombre": "Golf" },
+    { "id": 11, "marcaId": 4, "nombre": "Polo" },
+    { "id": 12, "marcaId": 4, "nombre": "Nivus" }
+  ],
+  "anios": [
+    2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015
+  ]
+}

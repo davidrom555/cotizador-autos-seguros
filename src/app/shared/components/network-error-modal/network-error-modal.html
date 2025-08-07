@@ -1,0 +1,12 @@
+<div class="modal-overlay" *ngIf="show">
+  <div class="modal-network-error">
+    <div class="modal-icon">
+      <i class="fas fa-exclamation-triangle"></i>
+    </div>
+    <h3 class="modal-title">Error de red</h3>
+    <p class="modal-message">{{ message }}</p>
+    <button class="modal-btn" (click)="close()">
+      Cerrar
+    </button>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="plan-header">
+    <h2>Elegí tu plan de seguro</h2>
+    <p class="subtitle">Seleccioná la cobertura que mejor se adapte a tus necesidades</p>
+  </div>
+  
+  <form [formGroup]="planForm" (ngSubmit)="onSubmit()">
+    <div class="plan-options">
+      @for (plan of plans(); track plan.id) {
+        <div class="plan-card" 
+             [class.recommended]="plan.recommended"
+             [class.selected]="selectedPlanId() === plan.id"
+             (click)="selectPlan(plan.id)">
+          
+          <div class="plan-card-inner">
+            @if (plan.recommended) {
+              <div class="plan-badge">
+                <span>Más Elegido</span>
+              </div>
+            }
+            
+            <div class="plan-title-section">
+              <h3>{{ plan.name }}</h3>
+              <p class="plan-description">{{ plan.description }}</p>
+            </div>
+            
+            <div class="plan-features">
+              <ul>
+                @for (feature of plan.features; track feature) {
+                  <li>
+                    <i class="checkmark">✓</i>
+                    {{ feature }}
+                  </li>
+                }
+              </ul>
+            </div>
+            
+            <div class="plan-price-section">
+              <div class="plan-price">
+                <span class="currency">$</span>
+                <span class="amount">{{ formatPrice(getDynamicPlanPrice(plan)) }}</span>
+                <span class="period">/mes</span>
+              </div>
+            </div>  
+          </div>
+        </div>
+      }
+    </div>
+    
+    <div class="form-actions">
+      <button type="button" class="btn btn-primary btn-large" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i> Volver
+      </button>
+      <button 
+        type="submit"
+        class="btn btn-primary btn-large" 
+        [disabled]="!planForm.get('plan')?.value">
+        Continuar <i class="fas fa-arrow-right icon"></i>
+      </button>
+    </div>
+  </form>
+</div>

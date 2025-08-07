@@ -1,0 +1,20 @@
+{
+  "/api/geocoding": {
+    "target": "https://apis.datos.gob.ar",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api/geocoding": "/georef/api"
+    }
+  },
+  "/api/*": {
+    "target": "https://apis.correoargentino.com.ar",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

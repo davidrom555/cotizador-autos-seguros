@@ -1,0 +1,83 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { 
+  height: 100%; 
+  margin: 0;
+  padding: 0;
+}
+
+body { 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Responsive breakpoints */
+$mobile: 576px;
+$tablet: 768px;
+$desktop: 992px;
+$large: 1200px;
+
+/* Global responsive utilities */
+.container-responsive {
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+  
+  @media (min-width: $mobile) {
+    max-width: 540px;
+  }
+  
+  @media (min-width: $tablet) {
+    max-width: 720px;
+  }
+  
+  @media (min-width: $desktop) {
+    max-width: 960px;
+  }
+  
+  @media (min-width: $large) {
+    max-width: 1140px;
+  }
+}
+
+/* Responsive typography */
+h1, h2, h3, h4, h5, h6 {
+  @media (max-width: $mobile) {
+    font-size: calc(1rem + 0.5vw);
+  }
+}
+
+/* Form responsive styles */
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1rem;
+  
+  @media (max-width: $mobile) {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+}
+
+/* Estilos globales para el autocompletado de Material */
+.cdk-overlay-pane {
+  background-color: #f0f0f0 !important;
+  opacity: 1 !important;
+}
+
+.custom-autocomplete-panel {
+  max-height: 200px;
+  overflow: auto;
+  background-color: #f0f0f0 !important;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  opacity: 1;
+}

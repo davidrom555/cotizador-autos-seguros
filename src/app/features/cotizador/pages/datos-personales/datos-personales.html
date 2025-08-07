@@ -1,0 +1,280 @@
+<app-network-error-modal
+  [show]="networkErrorModal()"
+  [message]="networkErrorMessage()"
+  (closed)="networkErrorModal.set(false)"
+></app-network-error-modal>
+
+<!-- datos-personales.html -->
+<div class="main-content form-container">
+  <div class="container">
+    <!-- Header -->
+    <div class="form-header">
+      <div class="car-icon">
+        <i class="fas fa-user-edit"></i>
+      </div>
+      <h2>Información Personal</h2>
+      <p class="subtitle">
+        Ingresá tus datos personales y dirección para personalizar tu seguro
+      </p>
+    </div>
+
+    <form [formGroup]="personalForm" (ngSubmit)="onSubmit()">
+      <div class="form-content">
+        <div class="form-section">
+          <div class="form-fields-grid">
+            <!-- Nombre -->
+            <div class="custom-field">
+              <label class="field-label">
+                <i class="fas fa-user"></i>
+                Nombre <span class="required">*</span>
+              </label>
+              <div class="input-container">
+                <input
+                  type="text"
+                  id="firstName"
+                  formControlName="firstName"
+                  placeholder="Ingrese su nombre"
+                  autocomplete="off"
+                  spellcheck="false"
+                  class="custom-input"
+                  maxlength="30"
+                />
+              </div>
+              <div class="error-message">
+                @if (personalForm.get('firstName')?.invalid && personalForm.get('firstName')?.touched) {
+                  @if (personalForm.get('firstName')?.hasError('required')) {
+                    <span>
+                      <i class="fas fa-exclamation-triangle error-icon"></i>
+                      Nombre es requerido.
+                    </span>
+                  }
+                  
+                  @if (personalForm.get('firstName')?.hasError('maxlength')) {
+                    <span>
+                      <i class="fas fa-exclamation-triangle error-icon"></i>
+                      Nombre no puede exceder los 30 caracteres.
+                    </span>
+                  }
+                  @if (personalForm.get('firstName')?.hasError('pattern')) {
+                    <span>
+                      <i class="fas fa-exclamation-triangle error-icon"></i>
+                      Nombre solo puede contener letras y espacios.
+                    </span>
+                  }
+                }
+              </div>
+            </div>
+
+            <!-- Apellido -->
+            <div class="custom-field">
+              <label class="field-label">
+                <i class="fas fa-user"></i>
+                Apellido <span class="required">*</span>
+              </label>
+              <div class="input-container">
+                <input
+                  type="text"
+                  id="lastName"
+                  formControlName="lastName"
+                  placeholder="Ingrese su apellido"
+                  autocomplete="off"
+                  spellcheck="false"
+                  class="custom-input"
+                  maxlength="30"
+                />
+              </div>
+              <div class="error-message">
+                @if (personalForm.get('lastName')?.invalid && personalForm.get('lastName')?.touched) {
+                  @if (personalForm.get('lastName')?.hasError('required')) {
+                    <span>
+                      <i class="fas fa-exclamation-triangle error-icon"></i>
+                      Apellido es requerido.
+                    </span>
+                  }
+                  
+                  @if (personalForm.get('lastName')?.hasError('maxlength')) {
+                    <span>
+                      <i class="fas fa-exclamation-triangle error-icon"></i>
+                      Apellido no puede exceder los 30 caracteres.
+                    </span>
+                  }
+                  @if (personalForm.get('lastName')?.hasError('pattern')) {
+                    <span>
+                      <i class="fas fa-exclamation-triangle error-icon"></i>
+                      Apellido solo puede contener letras y espacios.
+                    </span>
+                  }
+                }
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="custom-field">
+              <label class="field-label">
+                <i class="fas fa-envelope"></i>
+                Email <span class="required">*</span>
+              </label>
+              <div class="input-container">
+                <input
+                  type="email"
+                  id="email"
+                  formControlName="email"
+                  placeholder="ejemplo@email.com"
+                  autocomplete="off"
+                  spellcheck="false"
+                  class="custom-input"
+                  maxlength="50"
+                />
+              </div>
+              <div class="error-message">
+                @if (personalForm.get('email')?.errors?.['required'] && personalForm.get('email')?.touched) {
+                  <span>
+                    <i class="fas fa-exclamation-triangle error-icon"></i>
+                    Email es requerido.
+                  </span>
+                }
+                @if (personalForm.get('email')?.errors?.['email'] && personalForm.get('email')?.touched) {
+                  <span>
+                    <i class="fas fa-exclamation-triangle error-icon"></i>
+                    Email debe tener formato válido.
+                  </span>
+                }
+              </div>
+            </div>
+
+            <!-- Teléfono -->
+            <div class="custom-field">
+              <label class="field-label">
+                <i class="fas fa-phone"></i>
+                Teléfono <span class="required">*</span>
+              </label>
+              <div class="input-container">
+                <input
+                  type="tel"
+                  id="phone"
+                  formControlName="phone"
+                  placeholder="1123456789"
+                  maxlength="10"
+                  autocomplete="off"
+                  spellcheck="false"
+                  class="custom-input"
+                />
+              </div>
+              <div class="error-message">
+                @if (personalForm.get('phone')?.errors?.['required'] && personalForm.get('phone')?.touched) {
+                  <span>
+                    <i class="fas fa-exclamation-triangle error-icon"></i>
+                    Teléfono es requerido.
+                  </span>
+                }
+                @if (personalForm.get('phone')?.errors?.['pattern'] && personalForm.get('phone')?.touched) {
+                  <span>
+                    <i class="fas fa-exclamation-triangle error-icon"></i>
+                    Teléfono debe tener 10 dígitos.
+                  </span>
+                }
+              </div>
+            </div>
+
+            <!-- Código Postal o Localidad -->
+            <div class="custom-field">
+              <label class="field-label">
+                <i class="fas fa-map-pin"></i>
+                Código Postal<span class="required">*</span>
+              </label>
+              <div class="input-container">
+                <input
+                  type="text"
+                  id="postalCode"
+                  formControlName="postalCode"
+                  placeholder="Ingrese su código postal"
+                  autocomplete="off"
+                  spellcheck="false"
+                  class="custom-input"
+                  (focus)="onFocus()"
+                  (blur)="onBlur()"
+                  maxlength="8"
+                />
+                <!-- Dropdown de sugerencias -->
+                @if (showSuggestions() && suggestions().length > 0) {
+                  <div class="autocomplete-dropdown">
+                    @for (loc of suggestions(); track loc.postalCode + loc.locality) {
+                      <div class="autocomplete-option" (mousedown)="selectSuggestion(loc)">
+                        <div class="option-main">{{ loc.postalCode }} - {{ loc.locality }}</div>
+                        <div class="option-detail">{{ loc.province }}</div>
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
+              <div class="error-message">
+                @if (personalForm.get('postalCode')?.invalid && personalForm.get('postalCode')?.touched) {
+                  <span>
+                    <i class="fas fa-exclamation-triangle error-icon"></i>
+                    Este campo es requerido.
+                  </span>
+                }
+                @if (isLoading()) {
+                  <span class="buscando-container">
+                    <span class="spinner"></span>
+                    <span class="buscando-text">Buscando código postal...</span>
+                  </span>
+                }
+                @if (!isLoading() && !codigoPostalEncontrado) {
+                @if (mostrarErrorCodigoPostal) {
+                  <span class="error-busqueda"><i class="fas fa-exclamation-circle"></i> No se encontró el código postal.</span>
+                }
+                }
+              </div>
+            </div>
+
+            <!-- Localidad -->
+            <div class="custom-field">
+              <label class="field-label">
+                <i class="fas fa-map-marker-alt"></i>
+                Localidad <span class="required">*</span>
+              </label>
+              <div class="input-container">
+                <input
+                  type="text"
+                  id="locality"
+                  formControlName="locality"
+                  placeholder="Localidad seleccionada"
+                  class="custom-input"
+                  readonly
+                />
+              </div>
+              <div class="error-message">
+                @if (personalForm.get('locality')?.invalid && personalForm.get('locality')?.touched) {
+                  <span>
+                    <i class="fas fa-exclamation-triangle error-icon"></i>
+                    Localidad es requerida.
+                  </span>
+                }
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="form-options-section">
+          <button
+            type="button"
+            class="btn btn-secondary btn-large"
+            (click)="goBack()"
+          >
+            <i class="fas fa-arrow-left icon"></i> Volver
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary btn-large"
+            [disabled]="!personalForm.valid"
+          >
+            Continuar <i class="fas fa-arrow-right icon"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

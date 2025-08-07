@@ -1,0 +1,179 @@
+<header class="main-header">
+  <div class="header-container">
+    <!-- Logo y título -->
+    <div class="header-brand">
+      <div class="brand-icon">
+        <i class="fas fa-car"></i>
+      </div>
+      <div class="brand-text">
+        <h1>AutoSeguro</h1>
+        <span class="brand-subtitle">Cotizador de Seguros</span>
+      </div>
+    </div>
+
+    <!-- Navegación desktop -->
+    <nav class="header-nav desktop-nav">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a routerLink="/cotizador/datos-auto" 
+             routerLinkActive="active" 
+             class="nav-link">
+            <i class="fas fa-car"></i>
+            <span>Datos del Auto</span>
+            <div class="step-indicator"
+                 [class.completed]="isCarDataComplete()">
+              <i class="fas fa-check" *ngIf="isCarDataComplete()"></i>
+              <span class="step-number" *ngIf="!isCarDataComplete()">1</span>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a (click)="navigateTo('/cotizador/datos-personales', $event)"
+             routerLink="/cotizador/datos-personales" 
+             routerLinkActive="active" 
+             class="nav-link"
+             [class.disabled]="!isPersonalDataAvailable()">
+            <i class="fas fa-user"></i>
+            <span>Datos Personales</span>
+            <div class="step-indicator" 
+                 [class.completed]="isPersonalDataComplete()"
+                 [class.available]="isPersonalDataAvailable() && !isPersonalDataComplete()">
+              <i class="fas fa-check" *ngIf="isPersonalDataComplete()"></i>
+              <span class="step-number" *ngIf="isPersonalDataAvailable() && !isPersonalDataComplete()">2</span>
+              <i class="fas fa-lock" *ngIf="!isPersonalDataAvailable()"></i>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a (click)="navigateTo('/cotizador/elegir-plan', $event)"
+             routerLink="/cotizador/elegir-plan" 
+             routerLinkActive="active" 
+             class="nav-link"
+             [class.disabled]="!isPlanSelectionAvailable()">
+            <i class="fas fa-shield-alt"></i>
+            <span>Elegir Plan</span>
+            <div class="step-indicator" 
+                 [class.completed]="isPlanDataComplete()"
+                 [class.available]="isPlanSelectionAvailable() && !isPlanDataComplete()">
+              <i class="fas fa-check" *ngIf="isPlanDataComplete()"></i>
+              <span class="step-number" *ngIf="isPlanSelectionAvailable() && !isPlanDataComplete()">3</span>
+              <i class="fas fa-lock" *ngIf="!isPlanSelectionAvailable()"></i>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a (click)="navigateTo('/cotizador/confirmacion', $event)"
+             routerLink="/cotizador/confirmacion" 
+             routerLinkActive="active" 
+             class="nav-link"
+             [class.disabled]="!isConfirmationAvailable()">
+            <i class="fas fa-check-circle"></i>
+            <span>Confirmación</span>
+            <div class="step-indicator" 
+                 [class.available]="isConfirmationAvailable()">
+              @if (isConfirmationAvailable()) {
+              <span class="step-number">4</span>
+            } @else {
+              <i class="fas fa-lock"></i>
+            }
+            </div>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Botón hamburguesa para móvil -->
+    <button class="mobile-menu-btn" 
+            (click)="toggleMobileMenu()" 
+            [class.active]="isMobileMenuOpen()">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+
+  <!-- Navegación móvil - NUEVO ORDEN -->
+  <nav class="header-nav mobile-nav" 
+       [class.open]="isMobileMenuOpen()">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a routerLink="/cotizador/datos-auto" 
+           routerLinkActive="active" 
+           class="nav-link"
+           (click)="closeMobileMenu()">
+          <i class="fas fa-car"></i>
+          <span>Datos del Auto</span>
+          <div class="step-indicator"
+               [class.completed]="isCarDataComplete()">
+            @if (isCarDataComplete()) {
+              <i class="fas fa-check"></i>
+            } @else {
+              <span class="step-number">1</span>
+            }
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a (click)="navigateTo('/cotizador/datos-personales', $event)"
+           routerLink="/cotizador/datos-personales" 
+           routerLinkActive="active" 
+           class="nav-link"
+           [class.disabled]="!isPersonalDataAvailable()">
+          <i class="fas fa-user"></i>
+          <span>Datos Personales</span>
+          <div class="step-indicator" 
+               [class.completed]="isPersonalDataComplete()"
+               [class.available]="isPersonalDataAvailable() && !isPersonalDataComplete()">
+            <i class="fas fa-check" *ngIf="isPersonalDataComplete()"></i>
+            <span class="step-number" *ngIf="isPersonalDataAvailable() && !isPersonalDataComplete()">2</span>
+            <i class="fas fa-lock" *ngIf="!isPersonalDataAvailable()"></i>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a (click)="navigateTo('/cotizador/elegir-plan', $event)"
+           routerLink="/cotizador/elegir-plan" 
+           routerLinkActive="active" 
+           class="nav-link"
+           [class.disabled]="!isPlanSelectionAvailable()">
+          <i class="fas fa-shield-alt"></i>
+          <span>Elegir Plan</span>
+          <div class="step-indicator" 
+               [class.completed]="isPlanDataComplete()"
+               [class.available]="isPlanSelectionAvailable() && !isPlanDataComplete()">
+            @if (isPlanDataComplete()) {
+              <i class="fas fa-check"></i>
+            } @else if (isPlanSelectionAvailable()) {
+              <span class="step-number">3</span>
+            } @else {
+              <i class="fas fa-lock"></i>
+            }
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a (click)="navigateTo('/cotizador/confirmacion', $event)"
+           routerLink="/cotizador/confirmacion" 
+           routerLinkActive="active" 
+           class="nav-link"
+           [class.disabled]="!isConfirmationAvailable()">
+          <i class="fas fa-check-circle"></i>
+          <span>Confirmación</span>
+          <div class="step-indicator" 
+               [class.available]="isConfirmationAvailable()">
+            @if (isConfirmationAvailable()) {
+              <span class="step-number">4</span>
+            } @else {
+              <i class="fas fa-lock"></i>
+            }
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Overlay para cerrar menú móvil -->
+  <div class="mobile-overlay" 
+       [class.active]="isMobileMenuOpen()"
+       (click)="closeMobileMenu()"></div>
+</header>
