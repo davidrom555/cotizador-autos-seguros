@@ -32,14 +32,15 @@
     "@emailjs/browser": "^4.4.1",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.1",
+    "openai": "^5.12.2",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
-    "zone.js": "^0.15.1"
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@angular/build": "^20.1.0",
     "@angular/cli": "^20.1.0",
     "@angular/compiler-cli": "^20.1.0",
+    "@angular/platform-browser-dynamic": "^20.1.4",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.8.0",
     "karma": "~6.4.0",
@@ -47,7 +48,22 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.8.2"
+    "typescript": "~5.8.2",
+    "zone.js": "^0.15.1"
   },
-  "proxyConfig": "proxy.conf.json"
+  "proxyConfig": "proxy.conf.json",
+  "description": "Este proyecto es una aplicación web para cotizar seguros de automóviles, desarrollada con Angular.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidrom555/cotizador-autos-seguros.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/davidrom555/cotizador-autos-seguros/issues"
+  },
+  "homepage": "https://github.com/davidrom555/cotizador-autos-seguros#readme"
 }

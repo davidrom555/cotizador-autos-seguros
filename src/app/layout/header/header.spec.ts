@@ -1,19 +1,27 @@
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HeaderComponent } from './header';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { ActivatedRoute } from '@angular/router';
 
-import { Header } from './header';
-
-describe('Header', () => {
-  let component: Header;
-  let fixture: ComponentFixture<Header>;
+describe('HeaderComponent', () => {
+  let component: HeaderComponent;
+  let fixture: ComponentFixture<HeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Header]
+      imports: [HeaderComponent],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        { provide: ActivatedRoute, useValue: {} }
+      ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Header);
-    component = fixture.componentInstance;
+  fixture = TestBed.createComponent(HeaderComponent);
+  component = fixture.componentInstance;
     fixture.detectChanges();
   });
 

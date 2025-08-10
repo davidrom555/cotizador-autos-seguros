@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DatosAutoComponent } from './datos-auto';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('DatosAuto', () => {
   let component: DatosAutoComponent;
@@ -8,7 +10,11 @@ describe('DatosAuto', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DatosAutoComponent]
+      imports: [DatosAutoComponent],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting()
+      ]
     })
     .compileComponents();
 
