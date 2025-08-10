@@ -41,13 +41,16 @@ export const routes: Routes = [
   loadComponent: () => import('./features/cotizador/pages/elegir-plan/elegir-plan.component').then(m => m.ElegirPlanComponent),
         canActivate: [StepValidationGuard]
       },
+
       {
         path: 'confirmacion',
-  loadComponent: () => import('./features/cotizador/pages/confirmacion/confirmacion.component').then(m => m.ConfirmacionComponent),
+        loadComponent: () => import('./features/cotizador/pages/confirmacion/confirmacion.component').then(m => m.ConfirmacionComponent),
         canActivate: [StepValidationGuard]
       },
       { path: '', redirectTo: 'datos-auto', pathMatch: 'full' }
     ]
   },
-  { path: '', redirectTo: 'cotizador', pathMatch: 'full' }
+  { path: '', redirectTo: 'cotizador', pathMatch: 'full' },
+
+  { path: '**', redirectTo: 'cotizador/datos-auto', pathMatch: 'full' }
 ];
