@@ -43,8 +43,8 @@ const isObjectValidator = (control: AbstractControl): ValidationErrors | null =>
     MatProgressSpinnerModule,
     NetworkErrorModalComponent
   ],
-  templateUrl: './datos-auto.html',
-  styleUrls: ['./datos-auto.scss']
+  templateUrl: './datos-auto.component.html',
+  styleUrls: ['./datos-auto.component.scss']
 })
 export class DatosAutoComponent implements OnInit {
   networkErrorModal = signal(false);

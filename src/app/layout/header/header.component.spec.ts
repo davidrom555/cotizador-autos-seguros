@@ -1,19 +1,17 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ElegirPlanComponent } from './elegir-plan';
+import { HeaderComponent } from './header.component';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ActivatedRoute } from '@angular/router';
 
-describe('ElegirPlan', () => {
-  let component: ElegirPlanComponent;
-  let fixture: ComponentFixture<ElegirPlanComponent>;
+describe('HeaderComponent', () => {
+  let component: HeaderComponent;
+  let fixture: ComponentFixture<HeaderComponent>;
 
   beforeEach(async () => {
-
-
     await TestBed.configureTestingModule({
-      imports: [ElegirPlanComponent],
+      imports: [HeaderComponent],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -22,8 +20,8 @@ describe('ElegirPlan', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ElegirPlanComponent);
-    component = fixture.componentInstance;
+  fixture = TestBed.createComponent(HeaderComponent);
+  component = fixture.componentInstance;
     fixture.detectChanges();
   });
 

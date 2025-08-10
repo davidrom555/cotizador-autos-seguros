@@ -6,8 +6,8 @@ import { CommonModule } from '@angular/common';
   selector: 'app-network-error-modal',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './network-error-modal.html',
-  styleUrls: ['./network-error-modal.scss']
+  templateUrl: './network-error-modal.component.html',
+  styleUrls: ['./network-error-modal.component.scss']
 })
 export class NetworkErrorModalComponent {
   @Input() show: boolean = false;

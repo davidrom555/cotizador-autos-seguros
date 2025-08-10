@@ -7,8 +7,8 @@ import { CotizadorService } from '../../features/cotizador/services/cotizador.se
   selector: 'app-header',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './header.html',
-  styleUrls: ['./header.scss']
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
   isMobileMenuOpen = signal(false);

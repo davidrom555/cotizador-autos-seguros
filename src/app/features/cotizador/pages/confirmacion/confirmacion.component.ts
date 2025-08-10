@@ -11,8 +11,8 @@ import emailjs from '@emailjs/browser';
   standalone: true,
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './confirmacion.html',
-  styleUrls: ['./confirmacion.scss'],
+  templateUrl: './confirmacion.component.html',
+  styleUrls: ['./confirmacion.component.scss'],
 })
 export class ConfirmacionComponent implements OnInit {
   public car: CarData | null = null;

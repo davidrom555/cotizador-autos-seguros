@@ -8,8 +8,8 @@ import { CommonModule } from '@angular/common';
   selector: 'app-elegir-plan',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './elegir-plan.html',
-  styleUrls: ['./elegir-plan.scss'],
+  templateUrl: './elegir-plan.component.html',
+  styleUrls: ['./elegir-plan.component.scss'],
 })
 export class ElegirPlanComponent implements OnInit {
   public car: any = null;

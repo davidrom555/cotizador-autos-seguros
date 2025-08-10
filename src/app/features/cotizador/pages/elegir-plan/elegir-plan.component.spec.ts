@@ -1,18 +1,19 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DatosPersonalesComponent } from './datos-personales';
+import { ElegirPlanComponent } from './elegir-plan.component';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ActivatedRoute } from '@angular/router';
 
-describe('DatosPersonalesComponent', () => {
-  let component: DatosPersonalesComponent;
-  let fixture: ComponentFixture<DatosPersonalesComponent>;
+describe('ElegirPlan', () => {
+  let component: ElegirPlanComponent;
+  let fixture: ComponentFixture<ElegirPlanComponent>;
 
   beforeEach(async () => {
 
+
     await TestBed.configureTestingModule({
-      imports: [DatosPersonalesComponent],
+      imports: [ElegirPlanComponent],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -21,8 +22,8 @@ describe('DatosPersonalesComponent', () => {
     })
     .compileComponents();
 
-  fixture = TestBed.createComponent(DatosPersonalesComponent);
-  component = fixture.componentInstance;
+    fixture = TestBed.createComponent(ElegirPlanComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 

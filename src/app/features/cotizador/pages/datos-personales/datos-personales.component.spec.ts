@@ -1,24 +1,27 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ConfirmacionComponent } from './confirmacion';
+import { DatosPersonalesComponent } from './datos-personales.component';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { ActivatedRoute } from '@angular/router';
 
-describe('ConfirmacionComponent', () => {
-  let component: ConfirmacionComponent;
-  let fixture: ComponentFixture<ConfirmacionComponent>;
+describe('DatosPersonalesComponent', () => {
+  let component: DatosPersonalesComponent;
+  let fixture: ComponentFixture<DatosPersonalesComponent>;
 
   beforeEach(async () => {
+
     await TestBed.configureTestingModule({
-      imports: [ConfirmacionComponent],
+      imports: [DatosPersonalesComponent],
       providers: [
         provideHttpClient(),
-        provideHttpClientTesting()
+        provideHttpClientTesting(),
+        { provide: ActivatedRoute, useValue: {} }
       ]
     })
     .compileComponents();
 
-  fixture = TestBed.createComponent(ConfirmacionComponent);
+  fixture = TestBed.createComponent(DatosPersonalesComponent);
   component = fixture.componentInstance;
     fixture.detectChanges();
   });

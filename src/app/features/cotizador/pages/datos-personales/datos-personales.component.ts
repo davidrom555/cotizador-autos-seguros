@@ -14,8 +14,8 @@ import { NetworkErrorModalComponent } from '../../../../shared/components/networ
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, NetworkErrorModalComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './datos-personales.html',
-  styleUrls: ['./datos-personales.scss'],
+  templateUrl: './datos-personales.component.html',
+  styleUrls: ['./datos-personales.component.scss'],
 })
 export class DatosPersonalesComponent implements OnInit {
   networkErrorModal = signal(false);
