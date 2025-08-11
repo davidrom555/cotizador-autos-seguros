@@ -15,6 +15,10 @@ import emailjs from '@emailjs/browser';
   styleUrls: ['./confirmacion.component.scss'],
 })
 export class ConfirmacionComponent implements OnInit {
+  // trackBy para planFeatures
+  trackByFeature(index: number, feature: string): string {
+    return feature;
+  }
   public car: CarData | null = null;
   public plan: PlanData | null = null;
   public person: PersonalData | null = null;

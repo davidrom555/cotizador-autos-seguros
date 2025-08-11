@@ -84,7 +84,7 @@
       <div class="coverage-section">
         <h4><i class="fas fa-shield-alt"></i> Tu Cobertura Incluye</h4>
         <div class="features-grid">
-          <div class="feature-item" *ngFor="let feature of planFeatures()">
+          <div class="feature-item" *ngFor="let feature of planFeatures(); trackBy: trackByFeature">
             <i class="checkmark">✓</i>
             <span>{{ feature }}</span>
           </div>
