@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 
@@ -7,7 +7,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './network-error-modal.component.html',
-  styleUrls: ['./network-error-modal.component.scss']
+  styleUrls: ['./network-error-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NetworkErrorModalComponent {
   @Input() show: boolean = false;

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CotizadorService } from '../../services/cotizador.service';
@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './elegir-plan.component.html',
   styleUrls: ['./elegir-plan.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ElegirPlanComponent implements OnInit {
   public car: any = null;

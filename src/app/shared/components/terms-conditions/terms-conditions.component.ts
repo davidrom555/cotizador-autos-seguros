@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './terms-conditions.component.html',
-  styleUrls: ['./terms-conditions.component.scss']
+  styleUrls: ['./terms-conditions.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TermsConditionsComponent {
   lastUpdated = signal('2 de Agosto de 2025');
