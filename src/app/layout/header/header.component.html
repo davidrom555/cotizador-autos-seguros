@@ -22,8 +22,12 @@
             <span>Datos del Auto</span>
             <div class="step-indicator"
                  [class.completed]="isCarDataComplete()">
-              <i class="fas fa-check" *ngIf="isCarDataComplete()"></i>
-              <span class="step-number" *ngIf="!isCarDataComplete()">1</span>
+              @if (isCarDataComplete()) {
+                <i class="fas fa-check"></i>
+              }
+              @if (!isCarDataComplete()) {
+                <span class="step-number">1</span>
+              }
             </div>
           </a>
         </li>
@@ -38,9 +42,15 @@
             <div class="step-indicator" 
                  [class.completed]="isPersonalDataComplete()"
                  [class.available]="isPersonalDataAvailable() && !isPersonalDataComplete()">
-              <i class="fas fa-check" *ngIf="isPersonalDataComplete()"></i>
-              <span class="step-number" *ngIf="isPersonalDataAvailable() && !isPersonalDataComplete()">2</span>
-              <i class="fas fa-lock" *ngIf="!isPersonalDataAvailable()"></i>
+              @if (isPersonalDataComplete()) {
+                <i class="fas fa-check"></i>
+              }
+              @if (isPersonalDataAvailable() && !isPersonalDataComplete()) {
+                <span class="step-number">2</span>
+              }
+              @if (!isPersonalDataAvailable()) {
+                <i class="fas fa-lock"></i>
+              }
             </div>
           </a>
         </li>
@@ -55,9 +65,15 @@
             <div class="step-indicator" 
                  [class.completed]="isPlanDataComplete()"
                  [class.available]="isPlanSelectionAvailable() && !isPlanDataComplete()">
-              <i class="fas fa-check" *ngIf="isPlanDataComplete()"></i>
-              <span class="step-number" *ngIf="isPlanSelectionAvailable() && !isPlanDataComplete()">3</span>
-              <i class="fas fa-lock" *ngIf="!isPlanSelectionAvailable()"></i>
+              @if (isPlanDataComplete()) {
+                <i class="fas fa-check"></i>
+              }
+              @if (isPlanSelectionAvailable() && !isPlanDataComplete()) {
+                <span class="step-number">3</span>
+              }
+              @if (!isPlanSelectionAvailable()) {
+                <i class="fas fa-lock"></i>
+              }
             </div>
           </a>
         </li>
@@ -124,9 +140,15 @@
           <div class="step-indicator" 
                [class.completed]="isPersonalDataComplete()"
                [class.available]="isPersonalDataAvailable() && !isPersonalDataComplete()">
-            <i class="fas fa-check" *ngIf="isPersonalDataComplete()"></i>
-            <span class="step-number" *ngIf="isPersonalDataAvailable() && !isPersonalDataComplete()">2</span>
-            <i class="fas fa-lock" *ngIf="!isPersonalDataAvailable()"></i>
+            @if (isPersonalDataComplete()) {
+              <i class="fas fa-check"></i>
+            }
+            @if (isPersonalDataAvailable() && !isPersonalDataComplete()) {
+              <span class="step-number">2</span>
+            }
+            @if (!isPersonalDataAvailable()) {
+              <i class="fas fa-lock"></i>
+            }
           </div>
         </a>
       </li>

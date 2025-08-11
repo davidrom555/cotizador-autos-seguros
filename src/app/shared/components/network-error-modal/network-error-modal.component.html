@@ -1,4 +1,5 @@
-<div class="modal-overlay" *ngIf="show">
+@if (show) {
+<div class="modal-overlay">
   <div class="modal-network-error">
     <div class="modal-icon">
       <i class="fas fa-exclamation-triangle"></i>
@@ -10,3 +11,4 @@
     </button>
   </div>
 </div>
+}
